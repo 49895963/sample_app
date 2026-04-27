@@ -23,4 +23,3 @@ Things you may want to cover:
 
 * 第5章課題用に、feature/chapter5 ブランチでプルリクエスト作成の練習を行いました。...
 第6章課題用に、feature/chapter6 ブランチでPull Request作成の練習を行いました。
-第6回課題用に、feature/chapter6 ブランチでPull Request作成の練習を行いました。
