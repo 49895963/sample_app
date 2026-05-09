@@ -1,2 +1,25 @@
 <h1>Sign up</h1>
-<p>This will be a signup page for new users.</p>
+
+<form action="/signup" method="post">
+  <p>
+    <label>Name</label><br>
+    <input type="text" name="user[name]">
+  </p>
+
+  <p>
+    <label>Email</label><br>
+    <input type="email" name="user[email]">
+  </p>
+
+  <p>
+    <label>Password</label><br>
+    <input type="password" name="user[password]">
+  </p>
+
+  <p>
+    <label>Confirmation</label><br>
+    <input type="password" name="user[password_confirmation]">
+  </p>
+
+  <input type="submit" value="Create my account">
+</form>
