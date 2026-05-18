@@ -1,0 +1,12 @@
+<h1>Forgot password</h1>
+
+<form action="/password_resets" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <p>
+    <label>Email</label><br>
+    <input type="email" name="password_reset[email]">
+  </p>
+
+  <input type="submit" value="Submit">
+</form>

@@ -1,0 +1,30 @@
+<h1>Reset password</h1>
+
+<% if @user && @user.errors.any? %>
+  <div>
+    <h2><%= @user.errors.count %> error(s)</h2>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<form action="/password_resets/<%= params[:id] %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="patch">
+  <input type="hidden" name="email" value="<%= params[:email] %>">
+
+  <p>
+    <label>Password</label><br>
+    <input type="password" name="user[password]">
+  </p>
+
+  <p>
+    <label>Confirmation</label><br>
+    <input type="password" name="user[password_confirmation]">
+  </p>
+
+  <input type="submit" value="Update password">
+</form>
