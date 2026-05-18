@@ -22,3 +22,4 @@ Things you may want to cover:
 * Deployment instructions
 
 * 第5回課題用に、feature/chapter5 ブランチでプルリクエスト作成の練習を行いました。...
+第6回課題用に、feature/chapter6 ブランチでPull Request作成の練習を行いました。
