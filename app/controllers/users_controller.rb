@@ -12,10 +12,12 @@ class UsersController < ApplicationController
   end
 
   def new
+    @user = User.new
   end
 
   def create
     @user = User.new(user_params)
+
     if @user.save
       @user.send_activation_email
       flash[:info] = "Please check your email to activate your account."
@@ -69,6 +71,6 @@ class UsersController < ApplicationController
     end
 
     def admin_user
-      redirect_to root_url, status: :see_other unless current_user.admin?
+      redirect_to root_url, status: :see_other unless current_user&.admin?
     end
 end
