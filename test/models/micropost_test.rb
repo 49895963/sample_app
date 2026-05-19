@@ -2,7 +2,15 @@ require "test_helper"
 
 class MicropostTest < ActiveSupport::TestCase
   def setup
-    @user = users(:michael)
+    @user = User.create!(
+      name: "Micropost Test",
+      email: "micropost-test@example.com",
+      password: "password",
+      password_confirmation: "password",
+      activated: true,
+      activated_at: Time.zone.now
+    )
+
     @micropost = @user.microposts.build(content: "Lorem ipsum")
   end
 
@@ -24,8 +32,11 @@ class MicropostTest < ActiveSupport::TestCase
     @micropost.content = "a" * 141
     assert_not @micropost.valid?
   end
-  test "order should be most recent first" do
-    assert_equal microposts(:most_recent), Micropost.first
-  end
 
+  test "order should be most recent first" do
+    @user.microposts.create!(content: "Old post", created_at: 1.day.ago)
+    newer = @user.microposts.create!(content: "New post", created_at: Time.zone.now)
+
+    assert_equal newer, Micropost.first
+  end
 end

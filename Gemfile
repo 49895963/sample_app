@@ -72,3 +72,6 @@ group :test do
 end
 
 gem "bcrypt", "~> 3.1"
+
+# Keep Rails 7.0 test runner compatible
+gem "minitest", "~> 5.25"
