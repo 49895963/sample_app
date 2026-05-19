@@ -1,0 +1,18 @@
+<%= form_with(model: @micropost) do |f| %>
+  <% if @micropost.errors.any? %>
+    <div>
+      <p><%= pluralize(@micropost.errors.count, "error") %> prohibited this micropost from being saved:</p>
+      <ul>
+        <% @micropost.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.text_area :content, placeholder: "Compose new micropost..." %>
+  </div>
+
+  <%= f.submit "Post" %>
+<% end %>

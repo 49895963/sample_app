@@ -1,2 +1,9 @@
-<h1>Home</h1>
-<p>This is the home page for the Sample App.</p>
+<% if logged_in? %>
+  <h1>Home</h1>
+  <section class="micropost_form">
+    <%= render "shared/micropost_form" %>
+  </section>
+<% else %>
+  <h1>Home</h1>
+  <p>This is the home page for the Sample App.</p>
+<% end %>
