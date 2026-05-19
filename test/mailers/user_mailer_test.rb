@@ -1,12 +1,31 @@
 require "test_helper"
 
 class UserMailerTest < ActionMailer::TestCase
-  test "account_activation" do
-    mail = UserMailer.account_activation
-    assert_equal "Account activation", mail.subject
-    assert_equal ["to@example.org"], mail.to
-    assert_equal ["from@example.com"], mail.from
-    assert_match "Hi", mail.body.encoded
+  def setup
+    @user = User.create!(
+      name: "Mailer Test",
+      email: "mailer-test@example.com",
+      password: "password",
+      password_confirmation: "password",
+      activated: false
+    )
   end
 
+  test "account_activation" do
+    @user.activation_token = User.new_token
+    mail = UserMailer.account_activation(@user)
+
+    assert_equal [@user.email], mail.to
+    assert mail.body.encoded.present?
+    assert_match @user.activation_token, mail.body.encoded
+  end
+
+  test "password_reset" do
+    @user.reset_token = User.new_token
+    mail = UserMailer.password_reset(@user)
+
+    assert_equal [@user.email], mail.to
+    assert mail.body.encoded.present?
+    assert_match @user.reset_token, mail.body.encoded
+  end
 end
