@@ -78,3 +78,4 @@ gem "minitest", "~> 5.25"
 
 # Generate sample users and microposts
 gem "faker"
+gem "will_paginate"
