@@ -57,6 +57,10 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, nil)
   end
 
+  def feed
+    microposts
+  end
+
   private
 
     def create_activation_digest

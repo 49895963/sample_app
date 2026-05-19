@@ -9,6 +9,7 @@ class MicropostsController < ApplicationController
       flash[:success] = "Micropost created!"
       redirect_to root_url, status: :see_other
     else
+      @feed_items = current_user.feed.paginate(page: params[:page], per_page: 10)
       render "static_pages/home", status: :unprocessable_entity
     end
   end
