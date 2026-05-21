@@ -1,0 +1,13 @@
+<h1><%= @title %></h1>
+
+<p><%= link_to @user.name, @user %></p>
+
+<%= render "shared/stats" %>
+
+<% if @users.any? %>
+  <ul class="users">
+    <%= render @users %>
+  </ul>
+
+  <%= will_paginate @users %>
+<% end %>
