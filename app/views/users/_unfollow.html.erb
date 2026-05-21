@@ -1,0 +1,3 @@
+<% relationship = current_user.active_relationships.find_by(followed_id: @user.id) %>
+
+<%= button_to "Unfollow", relationship_path(relationship), method: :delete %>
