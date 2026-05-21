@@ -1,6 +1,8 @@
 <% if logged_in? %>
   <h1>Home</h1>
 
+  <%= render "shared/stats" %>
+
   <section class="micropost_form">
     <%= render "shared/micropost_form" %>
   </section>
