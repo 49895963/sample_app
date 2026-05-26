@@ -10,6 +10,8 @@ class User < ApplicationRecord
     end
   }
   has_many :microposts, dependent: :destroy
+  has_many :reactions, dependent: :destroy
+  has_many :reacted_microposts, through: :reactions, source: :micropost
   has_many :active_relationships, class_name: "Relationship",
                                   foreign_key: "follower_id",
                                   dependent: :destroy
@@ -91,6 +93,18 @@ class User < ApplicationRecord
 
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  def react(micropost)
+    reactions.find_or_create_by(micropost: micropost)
+  end
+
+  def unreact(micropost)
+    reactions.find_by(micropost: micropost)&.destroy
+  end
+
+  def reacted?(micropost)
+    reactions.exists?(micropost_id: micropost.id)
   end
 
   private

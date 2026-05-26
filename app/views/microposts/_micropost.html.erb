@@ -7,6 +7,19 @@
     </div>
   <% end %>
 
+  <div class="reaction">
+    <span><%= micropost.reactions.count %> いいね</span>
+
+    <% if logged_in? %>
+      <% if current_user.reacted?(micropost) %>
+        <% reaction = current_user.reactions.find_by(micropost_id: micropost.id) %>
+        <%= button_to "いいね解除", reaction_path(reaction), method: :delete %>
+      <% else %>
+        <%= button_to "いいね", reactions_path, params: { micropost_id: micropost.id }, method: :post %>
+      <% end %>
+    <% end %>
+  </div>
+
   <span class="timestamp">
     Posted <%= time_ago_in_words(micropost.created_at) %> ago.
   </span>

@@ -86,4 +86,36 @@ class UserTest < ActiveSupport::TestCase
     assert_not michael.feed.include?(unfollowed_post)
   end
 
+  test "should react and unreact to micropost" do
+    user = User.create!(
+      name: "React Test User",
+      email: "react-test-user@example.com",
+      password: "password",
+      password_confirmation: "password",
+      activated: true,
+      activated_at: Time.zone.now
+    )
+
+    other_user = User.create!(
+      name: "Post Owner",
+      email: "post-owner@example.com",
+      password: "password",
+      password_confirmation: "password",
+      activated: true,
+      activated_at: Time.zone.now
+    )
+
+    micropost = other_user.microposts.create!(content: "React target post")
+
+    assert_not user.reacted?(micropost)
+
+    user.react(micropost)
+    assert user.reacted?(micropost)
+    assert_equal 1, micropost.reactions.count
+
+    user.unreact(micropost)
+    assert_not user.reacted?(micropost)
+    assert_equal 0, micropost.reactions.count
+  end
+
 end
