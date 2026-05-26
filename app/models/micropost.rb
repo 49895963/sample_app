@@ -1,4 +1,13 @@
 class Micropost < ApplicationRecord
+
+  scope :search, ->(keyword) {
+    if keyword.present?
+      escaped_keyword = sanitize_sql_like(keyword.to_s.downcase)
+      where("LOWER(content) LIKE :keyword", keyword: "%#{escaped_keyword}%")
+    else
+      all
+    end
+  }
   belongs_to :user
   has_one_attached :image
   default_scope -> { order(created_at: :desc) }

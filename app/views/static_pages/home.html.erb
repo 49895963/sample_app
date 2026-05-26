@@ -8,6 +8,12 @@
   </section>
 
   <h3>Micropost Feed</h3>
+
+  <%= form_with url: root_path, method: :get do |f| %>
+    <%= f.search_field :q, value: @query, placeholder: "投稿を検索" %>
+    <%= f.submit "検索" %>
+  <% end %>
+
   <%= render "shared/feed" %>
 <% else %>
   <h1>Home</h1>

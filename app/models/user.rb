@@ -1,4 +1,14 @@
 class User < ApplicationRecord
+
+  scope :search, ->(keyword) {
+    if keyword.present?
+      escaped_keyword = sanitize_sql_like(keyword.to_s.downcase)
+      where("LOWER(name) LIKE :keyword OR LOWER(email) LIKE :keyword",
+            keyword: "%#{escaped_keyword}%")
+    else
+      all
+    end
+  }
   has_many :microposts, dependent: :destroy
   has_many :active_relationships, class_name: "Relationship",
                                   foreign_key: "follower_id",
