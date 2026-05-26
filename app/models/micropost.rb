@@ -11,12 +11,12 @@ class Micropost < ApplicationRecord
       return unless image.attached?
 
       unless image.blob.byte_size <= 5.megabytes
-        errors.add(:image, "should be less than 5MB")
+        errors.add(:image, "は5MB未満にしてください")
       end
 
       acceptable_types = ["image/jpeg", "image/gif", "image/png"]
       unless acceptable_types.include?(image.content_type)
-        errors.add(:image, "must be a JPEG, GIF, or PNG")
+        errors.add(:image, "はJPEG、GIF、PNG形式にしてください")
       end
     end
 end
