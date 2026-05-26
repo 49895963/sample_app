@@ -12,7 +12,6 @@ jobs:
 
     env:
       RAILS_ENV: test
-      RUBYOPT: -rlogger
 
     steps:
       - name: Checkout code
@@ -25,7 +24,7 @@ jobs:
           bundler-cache: true
 
       - name: Prepare test database
-        run: bundle exec rails db:test:prepare
+        run: bundle exec rails db:schema:load
 
       - name: Run tests
         run: bundle exec rails test
